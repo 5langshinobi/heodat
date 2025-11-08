@@ -2,35 +2,32 @@ const express = require('express');
 const router = express.Router();
 const Achievement = require('../models/Achievement');
 
-// GET all achievements
+// GET all
 router.get('/', async (req, res) => {
   try {
-    const achievements = await Achievement.find().sort({ date: -1 });
-    res.json(achievements);
+    const achs = await Achievement.find();
+    res.json(achs);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
-// POST new achievement
+// POST new
 router.post('/', async (req, res) => {
-  const achievement = new Achievement({
-    title: req.body.title,
-    description: req.body.description
-  });
+  const ach = new Achievement(req.body);
   try {
-    const newAchievement = await achievement.save();
-    res.status(201).json(newAchievement);
+    const saved = await ach.save();
+    res.status(201).json(saved);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 });
 
-// DELETE achievement
+// DELETE
 router.delete('/:id', async (req, res) => {
   try {
     await Achievement.findByIdAndDelete(req.params.id);
-    res.json({ message: 'Deleted achievement' });
+    res.json({ message: 'Deleted' });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
