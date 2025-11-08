@@ -7,7 +7,7 @@ function App() {
   const [achievements, setAchievements] = useState([]);
 
   const fetchAchievements = async () => {
-    const res = await fetch('https://heodat-api.onrender.com/api/achievements');
+    const res = await fetch('https://heodat.onrender.com/api/achievements');
     const data = await res.json();
     setAchievements(data);
   };
@@ -19,7 +19,7 @@ function App() {
   };
 
   const handleDelete = async (id) => {
-    await fetch(`https://heodat-api.onrender.com/api/achievements/${id}`, { method: 'DELETE' });
+    await fetch(`https://heodat.onrender.com/api/achievements/${id}`, { method: 'DELETE' });
     setAchievements(achievements.filter(a => a._id !== id));
   };
 

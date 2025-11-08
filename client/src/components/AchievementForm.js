@@ -8,7 +8,7 @@ export default function AchievementForm({ onAdd }) {
     e.preventDefault();
     const newAch = { title, description };
 
-    const res = await fetch('https://heodat-api.onrender.com/api/achievements', {
+    const res = await fetch('https://heodat.onrender.com/api/achievements', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newAch)
