@@ -1,9 +1,17 @@
 const mongoose = require('mongoose');
 
-const AchievementSchema = new mongoose.Schema({
-  title: String,
-  description: String,
-  date: { type: Date, default: Date.now }
+const achievementSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String
+  },
+  date: {
+    type: Date,
+    default: Date.now
+  }
 });
 
-module.exports = mongoose.model('Achievement', AchievementSchema);
+module.exports = mongoose.model('Achievement', achievementSchema);
