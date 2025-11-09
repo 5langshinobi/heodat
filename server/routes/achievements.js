@@ -32,5 +32,15 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+// Thêm route GET /api/total-money
+router.get('/total-money', async (req, res) => {
+  try {
+    const achs = await Achievement.find();
+    const total = achs.reduce((sum, ach) => sum + (ach.amount || 0), 0);
+    res.json({ total });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
 module.exports = router;

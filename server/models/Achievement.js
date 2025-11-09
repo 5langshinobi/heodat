@@ -1,14 +1,11 @@
-router.post('/', async (req, res) => {
-  const { title, description, value } = req.body;
-  const achievement = new Achievement({
-    title,
-    description,
-    value: value || 100000 // Dùng 100k nếu không có
-  });
-  try {
-    const saved = await achievement.save();
-    res.status(201).json(saved);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
+const mongoose = require('mongoose');
+
+const achievementSchema = new mongoose.Schema({
+  title: String,
+  description: String,
+  amount: { type: Number, default: 0 }, // Số tiền tùy chỉnh
+  howEarned: String, // Cách kiếm (ví dụ: "Freelance", "Tiết kiệm lương")
+  date: { type: Date, default: Date.now }
 });
+
+module.exports = mongoose.model('Achievement', achievementSchema);
