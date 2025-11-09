@@ -1,41 +1,24 @@
 import React from 'react';
-import piggyImage from '../images/piggy.gif';
+import piggyImage from '../images/piggy.svg'; // Hoặc piggy.gif nếu dùng GIF động
 
 export default function PiggyBank({ totalMoney = 0, onClick }) {
   return (
     <div
       onClick={onClick}
-      style={{
-        textAlign: 'center',
-        padding: '20px',
-        background: 'linear-gradient(135deg, #ffebee, #fff0f5)',
-        borderRadius: '20px',
-        margin: '20px 0',
-        cursor: 'pointer',
-        boxShadow: '0 4px 10px rgba(233, 30, 99, 0.2)',
-        transition: 'transform 0.2s',
-        userSelect: 'none'
-      }}
-      onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-      onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+      className="piggy-bank"
+      style={{ cursor: 'pointer' }}
     >
       <img
         src={piggyImage}
         alt="Con heo đất sinh động"
         style={{
-          width: '180px',
+          width: '160px',
           height: 'auto',
-          animation: 'bounce 1.5s infinite',
+          animation: 'bounce 2s infinite',
           pointerEvents: 'none'
         }}
       />
-      <div style={{
-        fontSize: '48px',
-        fontWeight: 'bold',
-        color: '#e91e63',
-        marginTop: '10px',
-        fontFamily: 'Arial, sans-serif'
-      }}>
+      <div className="money-display">
         {(totalMoney || 0).toLocaleString('vi-VN')} VND
       </div>
     </div>
