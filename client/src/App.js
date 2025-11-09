@@ -24,18 +24,17 @@ function App() {
   useEffect(() => { fetchAchievements(); }, []);
 
   const handleAdd = (newAch) => {
-    setAchievements([newAch, ...achievements]);
-    setTotalMoney(totalMoney + (newAch.amount || 0));
-  };
+  setAchievements([newAch, ...achievements]);
+  setTotalMoney((prev) => prev + (newAch.amount || 0)); // Dùng callback
+};
 
   const handleDelete = async (id) => {
-    await fetch(`https://heodat.onrender.com/api/achievements/${id}`, { method: 'DELETE' });
-    const newAchs = achievements.filter(a => a._id !== id);
-    setAchievements(newAchs);
-    const money = newAchs.reduce((sum, ach) => sum + (ach.amount || 0), 0);
-    setTotalMoney(money);
-  };
-
+  const achToDelete = achievements.find(a => a._id === id);
+  await fetch(`https://heodat.onrender.com/api/achievements/${id}`, { method: 'DELETE' });
+  const newAchs = achievements.filter(a => a._id !== id);
+  setAchievements(newAchs);
+  setTotalMoney((prev) => prev - (achToDelete?.amount || 0));
+};
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
 
@@ -61,7 +60,7 @@ function App() {
 
       {/* Modal xem tổng tiền + cách kiếm */}
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
-        <h2>Tổng tiền: {totalMoney.toLocaleString('vi-VN')} VND</h2>
+       <h2>Tổng tiền: {(totalMoney || 0).toLocaleString('vi-VN')} VND</h2>
         <h3>Cách kiếm:</h3>
         <ul>
           {achievements.map((ach) => (

@@ -1,7 +1,7 @@
 import React from 'react';
 import piggyImage from '../images/piggy.gif';
 
-export default function PiggyBank({ count, onClick }) {
+export default function PiggyBank({ totalMoney = 0, onClick }) {
   return (
     <div
       onClick={onClick}
@@ -13,7 +13,8 @@ export default function PiggyBank({ count, onClick }) {
         margin: '20px 0',
         cursor: 'pointer',
         boxShadow: '0 4px 10px rgba(233, 30, 99, 0.2)',
-        transition: 'transform 0.2s'
+        transition: 'transform 0.2s',
+        userSelect: 'none'
       }}
       onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
       onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
@@ -24,16 +25,18 @@ export default function PiggyBank({ count, onClick }) {
         style={{
           width: '180px',
           height: 'auto',
-          animation: 'bounce 1.5s infinite'
+          animation: 'bounce 1.5s infinite',
+          pointerEvents: 'none'
         }}
       />
       <div style={{
         fontSize: '48px',
         fontWeight: 'bold',
         color: '#e91e63',
-        marginTop: '10px'
+        marginTop: '10px',
+        fontFamily: 'Arial, sans-serif'
       }}>
-        {count} đồng xu
+        {(totalMoney || 0).toLocaleString('vi-VN')} VND
       </div>
     </div>
   );
