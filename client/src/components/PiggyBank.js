@@ -1,5 +1,5 @@
 import React from 'react';
-import piggyImage from '../images/piggy.svg'; // Hoặc piggy.gif nếu dùng GIF động
+import piggyImage from '../images/piggy.gif'; // ĐÚNG: .gif
 
 export default function PiggyBank({ totalMoney = 0, onClick }) {
   return (
